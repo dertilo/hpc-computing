@@ -1,6 +1,8 @@
 # computing on TUB's HPC (High Performance Cluster)
 ## links
-https://hpc.tu-berlin.de/doku.php
+`https://hpc.tu-berlin.de/doku.php`  
+`https://hpcc.usc.edu/support/documentation/`  
+`https://hpc.uni.lu/users/docs/slurm_examples.html`
 
 ## access-rights
 Tobias magically makes that you're granted permissions
@@ -35,8 +37,11 @@ interactive session on node:
 * __c__ ores = 40
 * __n__ odes = 1
 * __pty__ makes it interactive   
-  
-status von jobs: `squeue`  
+
+interactive session with __GPU__:  
+`srun -A qu -t 30 -c 40 -n 1 --gres=gpu:tesla:1 -p gpu --pty /bin/bash`  
+
+status of jobs: `squeue`  
 shows your account-type: `sacctmgr show user <TUBIT_NAME> accounts`    
 
 ## setup python environment on gateway
@@ -48,7 +53,17 @@ cd: `cd hpc-computing`
 create environment: `conda create -n hpc-tutorial python=3.7`  
 activate environment: `conda activate hpc-tutorial`  
 install dependencies: `pip install -r requirements.txt`
-## simple monitoring example
+## monitoring example
+#### interactive 
+open interactive session  
+`srun -A qu -t 30 -c 40 -n 1 --pty /bin/bash`  
+`source activate hpc-tutorial`  
+`python monitoring_example/monitor_matrix_multiplications.py`
+#### batch
+run hpc_job.sh with sbatch-command  
+give environment name `hpc-tutorial` as argument to `hpc_job.sh`  
+give .py-file as second argument to `hpc_job.sh`  
+`sbatch hpc_job.sh hpc-tutorial monitoring_example/monitor_matrix_multiplications.py`
 do some numpy matrix multiplications notice that numpy uses all 40 cores (4000% usage)
 ![cpu-usage](monitoring_example/cpu.png)
 memory usage is around 4.3%
