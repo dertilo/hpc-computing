@@ -9,13 +9,16 @@ Tobias magically makes that you're granted permissions
 (see: https://hpc.tu-berlin.de/doku.php?id=hpc:hardware)
 * 132x MPP-Nodes with 40 threads, 256 GB memory
 * 20x GPU-Nodes with 40 threads, 512 GB memory, 2x NVIDIA Tesla P100 16GB
+
 ## ssh to the "frontend" == "gateway"  
 first give gateway your public ssh key  
 `ssh-copy-id -i ~/.ssh/id_rsa.pub <TUBIT_NAME>@gateway.hpc.tu-berlin.de`  
 log onto the gateway  
 `ssh <TUBIT_NAME>@gateway.hpc.tu-berlin.de`  
+
 ## mount the gateway/frontend to your local system  
 `sshfs <TUBIT_NAME>@gateway.hpc.tu-berlin.de:/home/users/t/<TUBIT_NAME> ~/hpc`  
+
 ## copy files to gateway
 * rsync  
 `rsync -aP --exclude=.git ~/some_folder ~/hpc`
@@ -23,6 +26,7 @@ log onto the gateway
 `scp -r /local/directory/ <TUBIT_NAME>@gateway.hpc.tu-berlin.de:/home/users/t/<TUBIT_NAME>/`
 * filezilla  
 `https://hpcc.usc.edu/support/documentation/transfer/computer-to-hpc/`
+
 ## some useful SLURM-commands
 interactive session on node:
 `srun -A qu -t 30 -c 40 -n 1 --pty /bin/bash`
@@ -34,6 +38,7 @@ interactive session on node:
   
 status von jobs: `squeue`  
 shows your account-type: `sacctmgr show user <TUBIT_NAME> accounts`    
+
 ## setup python environment on gateway
 get miniconda  
 `wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh`  
