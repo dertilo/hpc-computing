@@ -49,4 +49,20 @@ do some numpy matrix multiplications notice that numpy uses all 40 cores (4000% 
 memory usage is around 4.3%
 ![mem-usage](monitoring_example/mem.png)
 
+## multiprocessing example
+calculate mandelbrot-set  
+
+![mandelbrot-formula](multiprocessing_example/mandelbrot_formula.svg)
+-> this formula produces chaos == makes it unpredictable whether or not abs(z) converges or diverges after n-iterations; 
+this chaotic behavior justifies a parallel computing -> no GPU even though its an image!
+![mandelbrot-set](multiprocessing_example/mandelbrot_set.png)
+
+#### the more cores the faster  
+![cores-durations](multiprocessing_example/cores_durations.png)  
+#### cpu-usage over time
+![cpu-usage](multiprocessing_example/cpu.png)
+![mem-usage](multiprocessing_example/mem.png)
+
+
+
 
