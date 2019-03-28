@@ -12,13 +12,16 @@ Tobias magically makes that you're granted permissions
 * 132x MPP-Nodes with 40 threads, 256 GB memory
 * 20x GPU-Nodes with 40 threads, 512 GB memory, 2x NVIDIA Tesla P100 16GB
 
-## ssh to the "frontend" == "gateway"  
+## ssh the frontend/gateway  
 first give gateway your public ssh key  
 `ssh-copy-id -i ~/.ssh/id_rsa.pub <TUBIT_NAME>@gateway.hpc.tu-berlin.de`  
 log onto the gateway  
 `ssh <TUBIT_NAME>@gateway.hpc.tu-berlin.de`  
 
-## mount the gateway/frontend to your local system  
+#### give gitlab your public gateway key  
+manually copy this `cat ~/.ssh/id_rsa.pub`  
+
+#### mount the gateway/frontend to your local system  
 `sshfs <TUBIT_NAME>@gateway.hpc.tu-berlin.de:/home/users/t/<TUBIT_NAME> ~/hpc`  
 
 ## copy files to gateway
