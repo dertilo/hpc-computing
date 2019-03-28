@@ -61,6 +61,8 @@ install dependencies: `pip install -r requirements.txt`
 open interactive session  
 `srun -A qu -t 30 -c 40 -n 1 --pty /bin/bash`  
 `source activate hpc-tutorial`  
+or  
+`~/miniconda/bin/conda activate hpc-tutorial`  
 `python monitoring_example/monitor_matrix_multiplications.py`
 #### batch
 run hpc_job.sh with sbatch-command  
