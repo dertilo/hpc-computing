@@ -83,6 +83,27 @@ this chaotic behavior justifies a parallel computing -> no GPU even though its a
 ![cpu-usage](multiprocessing_example/cpu.png)
 ![mem-usage](multiprocessing_example/mem.png)
 
+## pytorch-image-classifier-example
+frog; truck; horse; frog  
+![mem-usage](pytorch_image_classifier_example/example_images.png)  
+
+#### interactive
+on gateway  
+`python pytorch_image_classifier_example/download_data.py`  
+on GPU-node  
+`srun -A qu -t 30 -c 40 -n 1 --gres=gpu:tesla:1 -p gpu --pty /bin/bash`  
+`cd hpc-computing`  
+`source activate hpc-tutorial`  
+`python python pytorch_image_classifier_example/cifar10_tutorial.py `  
+cpu-usage: towards the ends it high cause evaluation is done on CPUs not on GPUs!
+![cpu-usage](pytorch_image_classifier_example/cpu.png)  
+gpu-usage: around 14%
+![mem-usage](pytorch_image_classifier_example/gpu_util.png)
+gpu-memory-usage: some error in plot: y-axis displays MiB not percentage!!
+![mem-usage](pytorch_image_classifier_example/gpu_mem.png)
+
+
+
 
 
 
