@@ -1,2 +1,4 @@
 resourcesmonitor @ git+https://git@gitlab.tubit.tu-berlin.de/tilo-himmelsbach/resourcesmonitor.git#egg=resourcesmonitor
 scipy==1.2.0
+torch
+torchvision
