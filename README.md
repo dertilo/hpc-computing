@@ -5,7 +5,7 @@
 `https://hpc.uni.lu/users/docs/slurm_examples.html`
 
 ## access-rights
-Tobias magically makes that you're granted permissions
+some admin needs to grant permissions to you
 
 ## hardware on the cluster
 (see: https://hpc.tu-berlin.de/doku.php?id=hpc:hardware)
@@ -22,17 +22,19 @@ log onto the gateway
 manually copy this `cat ~/.ssh/id_rsa.pub`  
 
 #### mount the gateway/frontend to your local system  
-`sshfs <TUBIT_NAME>@gateway.hpc.tu-berlin.de:/home/users/t/<TUBIT_NAME> ~/hpc`  
+`sshfs <TUBIT_NAME>@gateway.hpc.tu-berlin.de:/home/users/<FIRST_LETTER_OF_TUBIT_NAME>/<TUBIT_NAME> ~/hpc`  
 
 ## copy files to gateway
+
 * rsync  
 `rsync -aP --exclude=.git ~/some_folder ~/hpc`
 * scp    
-`scp -r /local/directory/ <TUBIT_NAME>@gateway.hpc.tu-berlin.de:/home/users/t/<TUBIT_NAME>/`
+`scp -r /local/directory/ <TUBIT_NAME>@gateway.hpc.tu-berlin.de:/home/users/<FIRST_LETTER_OF_TUBIT_NAME>/<TUBIT_NAME>/`
 * filezilla  
 `https://hpcc.usc.edu/support/documentation/transfer/computer-to-hpc/`
 
 ## some useful SLURM-commands
+
 interactive session on node:
 `srun -A qu -t 30 -c 40 -n 1 --pty /bin/bash`
 * __A__ ccount=qu (somehow for me it also works without this)
@@ -48,15 +50,26 @@ status of jobs: `squeue`
 shows your account-type: `sacctmgr show user <TUBIT_NAME> accounts`    
 
 ## setup python environment on gateway
+
 get miniconda  
 `wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh`  
 install conda: `bash Miniconda3-latest-Linux-x86_64.sh`  
-clone it: `git clone git@gitlab.tubit.tu-berlin.de:tilo-himmelsbach/hpc-computing.git`
-cd: `cd hpc-computing`
+clone it: `git clone https://gitlab.tubit.tu-berlin.de/tilo-himmelsbach/hpc-computing.git`  
+cd: `cd hpc-computing`  
 create environment: `conda create -n hpc-tutorial python=3.7`  
 activate environment: `conda activate hpc-tutorial`  
-install dependencies: `pip install -r requirements.txt`
+install dependencies: `pip install -r requirements.txt`  
+
+### conda pip tensorflow issue 
+
+if one wants __tensorflow__ it needs to be installed via: `conda install tensorflow`  
+trying to install tensorflow via conda's pip leads to malformed link to `libstdc++.so.6`
+so tensorflow dependency in requirements.txt wont work
+### torch tensorflow issue
+working: `python -c "from tensorflow.python.client import device_lib; import torch; print(device_lib.list_local_devices())"`  
+not working: `python -c "import torch; from tensorflow.python.client import device_lib; print(device_lib.list_local_devices())"`    
 ## monitoring example
+
 #### interactive 
 open interactive session  
 `srun -A qu -t 30 -c 40 -n 1 --pty /bin/bash`  

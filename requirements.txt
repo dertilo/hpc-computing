@@ -2,3 +2,4 @@ resourcesmonitor @ git+https://git@gitlab.tubit.tu-berlin.de/tilo-himmelsbach/re
 scipy==1.2.0
 torch
 torchvision
+#tensorflow # -> not working here, see "conda pip tensorlfow issue" in README!
