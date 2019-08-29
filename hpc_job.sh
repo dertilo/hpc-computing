@@ -13,5 +13,5 @@
 #SBATCH --mail-type=NONE
 #SBATCH --mail-user=some.one@tu-berlin.de
 
-~/miniconda/bin/conda activate $1
-python $2 | tee > hpc.log
+source activate $1
+python $2 | tee $3.log
