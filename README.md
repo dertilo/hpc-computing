@@ -14,7 +14,8 @@ some admin needs to grant permissions to you
 
 ## ssh the frontend/gateway  
 first give gateway your public ssh key  
-`ssh-copy-id -i ~/.ssh/id_rsa.pub <TUBIT_NAME>@gateway.hpc.tu-berlin.de`  
+`ssh-copy-id -i ~/.ssh/id_rsa.pub <TUBIT_NAME>@gateway.hpc.tu-berlin.de`  # linux  
+`cat ~/.ssh/id_rsa.pub | ssh <TUBIT_NAME>@gateway.hpc.tu-berlin.de "cat >> ~/.ssh/authorized_keys"` # windows  
 log onto the gateway  
 `ssh <TUBIT_NAME>@gateway.hpc.tu-berlin.de`  
 
@@ -69,7 +70,8 @@ so tensorflow dependency in requirements.txt wont work
 working: `python -c "from tensorflow.python.client import device_lib; import torch; print(device_lib.list_local_devices())"`  
 not working: `python -c "import torch; from tensorflow.python.client import device_lib; print(device_lib.list_local_devices())"`    
 ## monitoring example
-
+#### run stuff on the frontend (you should not do any heavy computing there!)
+`OMP_NUM_THREADS=8 python whatever_script.py`
 #### interactive 
 open interactive session  
 `srun -A qu -t 30 -c 40 -n 1 --pty /bin/bash`  
