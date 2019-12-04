@@ -23,9 +23,12 @@ log onto the gateway
 manually copy this `cat ~/.ssh/id_rsa.pub`  
 
 #### mount the gateway/frontend to your local system  
+could be very slow
 `sshfs <TUBIT_NAME>@gateway.hpc.tu-berlin.de:/home/users/<FIRST_LETTER_OF_TUBIT_NAME>/<TUBIT_NAME> ~/hpc`  
 
 ## copy files to gateway
+* rsync over ssh
+`rsync -avz -e "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" --exclude=.git <YOUR_FOLDER> <TUBIT_NAME>@gateway.hpc.tu-berlin.de:/home/users/<FIRST_LETTER>/<TUBIT_NAME>/`
 
 * rsync  
 `rsync -aP --exclude=.git ~/some_folder ~/hpc`
@@ -49,6 +52,7 @@ interactive session with __GPU__:
 
 status of jobs: `squeue`  
 shows your account-type: `sacctmgr show user <TUBIT_NAME> accounts`    
+cancel job `scancel <JOB_ID>`
 
 ## setup python environment on gateway
 
@@ -74,7 +78,7 @@ not working: `python -c "import torch; from tensorflow.python.client import devi
 `OMP_NUM_THREADS=8 python whatever_script.py`
 #### interactive 
 open interactive session  
-`srun -A qu -t 30 -c 40 -n 1 --pty /bin/bash`  
+`srun -t 30 -c 40 -n 1 --pty /bin/bash`  
 `source activate hpc-tutorial`  
 or  
 `~/miniconda/bin/conda activate hpc-tutorial`  
