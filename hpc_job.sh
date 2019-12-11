@@ -14,4 +14,4 @@
 #SBATCH --mail-user=some.one@tu-berlin.de
 
 source activate $1
-python $2 | tee $3.log
+python $2 | tee hpc.log

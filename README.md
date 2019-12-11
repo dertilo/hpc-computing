@@ -74,17 +74,21 @@ install dependencies: `pip install -r requirements.txt`
 open interactive session `srun -t 30 -c 40 -n 1 --pty /bin/bash`  
 activate env: `source activate hpc-tutorial`  or  `~/miniconda/bin/conda activate hpc-tutorial`  
 run: `python monitoring_example/monitor_matrix_multiplications.py`
-#### 4.1.2 batch TODO(tilo) !!
-run hpc_job.sh with sbatch-command  
-give environment name `hpc-tutorial` as argument to `hpc_job.sh`  
-give .py-file as second argument to `hpc_job.sh`  
-`sbatch hpc_job.sh hpc-tutorial monitoring_example/monitor_matrix_multiplications.py`
-do some numpy matrix multiplications notice that numpy uses all 40 cores (4000% usage)
+#### 4.1.2 batch
+on hpc-gateway we run hpc_job.sh with sbatch-command (still in `hpc-computing`-folder) run 
+
+    sbatch hpc_job.sh hpc-tutorial monitoring_example/monitor_matrix_multiplications.py
+    
+* the `sbatch` command tells slurm to put our job in the queue  
+* the job is defined by the shell-script and its arguments  
+    * first arguement `hpc-tutorial` specifies the name of the conda-environment  
+    * second argument is the python-script to be run
+* the `monitor_matrix_multiplications.py` does some numpy matrix multiplications and creates a `cpu.png`- and `mem.png`-file; notice that numpy uses all 40 cores (4000% usage)
 ![cpu-usage](monitoring_example/cpu.png)
 memory usage is around 4.3%
 ![mem-usage](monitoring_example/mem.png)
 
-## multiprocessing example
+### 5 multiprocessing example
 calculate mandelbrot-set  
 
 ![mandelbrot-formula](multiprocessing_example/mandelbrot_formula.svg)
@@ -98,7 +102,7 @@ this chaotic behavior justifies a parallel computing -> no GPU even though its a
 ![cpu-usage](multiprocessing_example/cpu.png)
 ![mem-usage](multiprocessing_example/mem.png)
 
-## pytorch-image-classifier-example
+## 6. pytorch-image-classifier-example
 frog; truck; horse; frog  
 ![mem-usage](pytorch_image_classifier_example/example_images.png)  
 
@@ -106,7 +110,7 @@ frog; truck; horse; frog
 on gateway  
 `python pytorch_image_classifier_example/download_data.py`  
 on GPU-node  
-`srun -A qu -t 30 -c 40 -n 1 --gres=gpu:tesla:1 -p gpu --pty /bin/bash`  
+`srun -t 30 -c 40 -n 1 --gres=gpu:tesla:2 --partition=gpu --pty /bin/bash`  
 `cd hpc-computing`  
 `source activate hpc-tutorial`  
 `python python pytorch_image_classifier_example/cifar10_tutorial.py `  
