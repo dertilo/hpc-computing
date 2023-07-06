@@ -1,5 +1,5 @@
 resourcesmonitor @ git+https://git@gitlab.tubit.tu-berlin.de/tilo-himmelsbach/resourcesmonitor.git#egg=resourcesmonitor
-scipy==1.2.0
+scipy==1.10.0
 torch
 torchvision
 #tensorflow # -> not working here, see "conda pip tensorlfow issue" in README!
